@@ -1,18 +1,66 @@
-# Module name
+# Analytics
 
-Module description
+The analytics module provides a standard way to implement site analytics and event tracking (to be implemented).  
+
 
 ## Usage
 
-How to use the module
+TODO
 
 ## Hooks
 
-List of hooks provided and/or implemented by the module
+Provides the `hook_analytics_widget` and the `hook_analytics_widgets_alter` hooks.  
+Using these hooks other modules can provide their own statistics and analytics widgets to display on the admin analytics page.
+
+Implements the `hook_permission` hook to add the `"admin.analytics.view"` permission to the system and `hook_admin_page` hooks to add the analytics dashboard page to the admin UI.
+
+### hook_analytics_widget
+
+Return value:
+`id`: identifier, optional. It can be used to remove or modify the widget using the alter hook.  
+`content`: HTML string, the content of the admin widget  
+`weight`: number, optional: the order of the widget on the admin page
 
 ## Examples
 
-Code examples
+### Analytics widget using hook_analytics_widget 
+
+```
+{% comment %} Users widget {% endcomment %}
+{% graphql users %}
+query TotalUsers {
+  users(per_page: 1) {
+    total_entries
+  }
+}
+{% endgraphql %}
+
+{% capture users_content %}
+  <div class="flex flex-col justify-between h-full">
+    <div>
+      <div class="uppercase">Registered users</div>
+      <div class="font-bold">{{users.users.total_entries | json}}</div>
+      <br/>
+    </div>
+    <div>
+      <hr>
+      <div class="flex justify-end">
+        {% theme_render_rc 'components/atoms/button', weight: 'secondary', href: '/admin/users', content: 'View' %}
+      </div>
+    </div>
+  </div>
+{% endcapture %}
+
+{% capture users_widget %}
+  {% theme_render_rc 'components/atoms/card', content: users_content, classes: 'w-full sm:w-1/4' %}
+{% endcapture %}
+
+{% liquid
+  assign widget = null | hash_merge: content: users_widget, id: 'users_widget', weight: 2
+  assign result = '[]' | parse_json | add_to_array: widget
+  return result
+%}
+```
 
 ## Versioning
 
