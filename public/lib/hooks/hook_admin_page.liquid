@@ -1,0 +1,14 @@
+{% parse_json admin_pages %}
+[
+  {
+    "relative_path": "/admin/analytics",
+    "partial": "modules/analytics/admin_pages/analytics",
+    "menu": {
+      "title": "Analytics"
+    },
+    "permission": "admin.analytics.view"
+  }
+]
+{% endparse_json %}
+
+{% return admin_pages %}
