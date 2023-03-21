@@ -21,7 +21,8 @@ Return value is an array of objects in the following format for each widget obje
 `id`: identifier, optional. It can be used to find and remove or modify the widget using the alter hook.  
 `content`: HTML string, the content of the admin widget  
 `weight`: number, optional: the order of the widget on the admin page  
-`permission`: string, optional: the permission needed to view the widget. Default value: `"admin.analytics.view"`
+`permission`: string, optional: the permission needed to view the widget. Default value: `"admin.analytics.view"`  
+`access_callback`: path to access callback function, optional. Used for complex permission handling. For more details see the [can_do helper in the permission module](https://github.com/Platform-OS/pos-module-permission/blob/master/public/views/partials/lib/helpers/can_do.liquid)
 
 ## Examples
 
