@@ -9,7 +9,9 @@
 <section class="container flex md:flex-row flex-wrap gap-6">
   {% liquid
     for widget in analytics_widgets
-      if widget.content
+      hash_assign widget['permission'] = widget.permission | default: 'admin.analytics.view'
+      function can_view_widget = 'modules/permission/lib/helpers/can_do', requester: context.exports.current_profile, do: widget.permission, entity: widget, access_callback: widget.access_callback
+      if widget.content and can_view_widget
         print widget.content
       endif
     endfor
