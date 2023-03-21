@@ -16,14 +16,16 @@ Implements the `hook_permission` hook to add the `"admin.analytics.view"` permis
 
 ### hook_analytics_widget
 
-Return value:
-`id`: identifier, optional. It can be used to remove or modify the widget using the alter hook.  
+Return value is an array of objects in the following format for each widget object:  
+
+`id`: identifier, optional. It can be used to find and remove or modify the widget using the alter hook.  
 `content`: HTML string, the content of the admin widget  
 `weight`: number, optional: the order of the widget on the admin page
+`permission`: string, optional: the permission needed to view the widget. Default value: `"admin.analytics.view"`
 
 ## Examples
 
-### Analytics widget using hook_analytics_widget 
+### "Registered users" widget using hook_analytics_widget 
 
 ```
 {% comment %} Users widget {% endcomment %}
@@ -40,7 +42,6 @@ query TotalUsers {
     <div>
       <div class="uppercase">Registered users</div>
       <div class="font-bold">{{users.users.total_entries | json}}</div>
-      <br/>
     </div>
     <div>
       <hr>
@@ -56,7 +57,7 @@ query TotalUsers {
 {% endcapture %}
 
 {% liquid
-  assign widget = null | hash_merge: content: users_widget, id: 'users_widget', weight: 2
+  assign widget = null | hash_merge: content: users_widget, id: 'users_widget', weight: 2, permission: 'users.view.all'
   assign result = '[]' | parse_json | add_to_array: widget
   return result
 %}
