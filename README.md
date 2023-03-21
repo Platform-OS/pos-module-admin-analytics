@@ -20,7 +20,7 @@ Return value is an array of objects in the following format for each widget obje
 
 `id`: identifier, optional. It can be used to find and remove or modify the widget using the alter hook.  
 `content`: HTML string, the content of the admin widget  
-`weight`: number, optional: the order of the widget on the admin page
+`weight`: number, optional: the order of the widget on the admin page  
 `permission`: string, optional: the permission needed to view the widget. Default value: `"admin.analytics.view"`
 
 ## Examples
