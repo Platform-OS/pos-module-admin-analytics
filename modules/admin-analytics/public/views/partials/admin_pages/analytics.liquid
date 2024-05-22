@@ -1,6 +1,6 @@
 {% liquid
-  function hook_analytics_widgets = 'modules/core/lib/commands/hook/fire', hook: 'analytics_widget'
-  assign params_to_modify = null | hash_merge: analytics_widgets: hook_analytics_widgets
+  function hook_admin_analytics_widgets = 'modules/core/lib/commands/hook/fire', hook: 'analytics_widget'
+  assign params_to_modify = null | hash_merge: analytics_widgets: hook_admin_analytics_widgets
   function _ = 'modules/core/lib/commands/hook/alter', hook: 'analytics_widgets', params_to_modify: params_to_modify
 
   assign analytics_widgets = params_to_modify.analytics_widgets | array_sort_by: 'weight'

@@ -9,12 +9,12 @@ TODO
 
 ## Hooks
 
-Provides the `hook_analytics_widget` and the `hook_analytics_widgets_alter` hooks.  
+Provides the `hook_admin_analytics_widget` and the `hook_admin_analytics_widgets_alter` hooks.  
 Using these hooks other modules can provide their own statistics and analytics widgets to display on the admin analytics page.
 
 Implements the `hook_permission` hook to add the `"admin.analytics.view"` permission to the system and `hook_admin_page` hooks to add the analytics dashboard page to the admin UI.
 
-### hook_analytics_widget
+### hook_admin_analytics_widget
 
 Return value is an array of objects in the following format for each widget object:  
 
@@ -26,7 +26,7 @@ Return value is an array of objects in the following format for each widget obje
 
 ## Examples
 
-### "Registered users" widget using hook_analytics_widget 
+### "Registered users" widget using hook_admin_analytics_widget 
 
 ```
 {% comment %} Users widget {% endcomment %}
